@@ -1,12 +1,19 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+
 
 def pytest_addoption(parser):
     # Добавляем параметр --language для выбора языка (по умолчанию английский)
     parser.addoption(
-        "--language", action="store", default="en",
-        help="Choose language: en, ru, fr, etc."
+        "--language",
+        action="store",
+        default="en",
+        help="Choose language: en, ru, fr, etc.",
     )
 
 
@@ -16,16 +23,17 @@ def browser(request):
     user_language = request.config.getoption("language")
 
     # Создаём объект настроек Chrome
-    options = Options()  
-    
+    options = Options()
+
     # Устанавливаем язык интерфейса браузера (user_language должен быть определён заранее)
-    options.add_experimental_option('prefs', {'intl.accept_languages': user_language})  
-    
+    options.add_experimental_option("prefs", {"intl.accept_languages": user_language})
+
     # Запускаем Chrome с заданными опциями
-    browser = webdriver.Chrome(options=options)  
-    
+    service = Service(ChromeDriverManager().install())
+    browser = webdriver.Chrome(service=service, options=options)
+
     # Передаём объект браузера тесту. После завершения теста выполнение продолжается после yield
-    yield browser  
-    
+    yield browser
+
     # Закрываем браузер, чтобы не оставалось открытых процессов
-    browser.quit()  
+    browser.quit()
