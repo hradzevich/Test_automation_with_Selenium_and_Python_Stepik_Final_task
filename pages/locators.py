@@ -8,18 +8,19 @@ class BasePageLocators:
         By.XPATH,
         "//div[contains(@class, 'basket-mini')]//span[@class='btn-group']",
     )
-
-
-class MainPageLocators:
-    pass
+    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
 
 
 class LoginPageLocators:
-    EMAIL_FIELD = (By.ID, "id_login-username")
-    PASSWORD_FIELD = (By.ID, "id_login-password")
+    EMAIL_LOGUN = (By.ID, "id_login-username")
+    PASSWORD_LOGIN = (By.ID, "id_login-password")
     LOGIN_BTN = (By.XPATH, "//button[@name='login_submit']")
     LOGIN_FORM = (By.ID, "login_form")
     REGISTER_FORM = (By.ID, "register_form")
+    EMAIL_REGISTER = (By.ID, "id_registration-email")
+    PASSWORD_REGISTER_1 = (By.ID, "id_registration-password1")
+    PASSWORD_REGISTER_2 = (By.ID, "id_registration-password2")
+    REGISTER_BTN = (By.XPATH, "//button[@name='registration_submit']")
 
 
 class ProductPageLocators:
