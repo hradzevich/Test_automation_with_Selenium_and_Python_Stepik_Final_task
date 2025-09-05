@@ -28,4 +28,10 @@ def test_guest_can_go_to_login_page(browser):
     login_page.should_be_login_page()
 
 
-
+def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
+    link = "http://selenium1py.pythonanywhere.com"
+    main_page = MainPage(browser, link)
+    main_page.open()
+    basket_page = main_page.go_to_basket()
+    basket_page.should_be_empty_basket_text()
+    basket_page.should_be_no_items_in_basket()

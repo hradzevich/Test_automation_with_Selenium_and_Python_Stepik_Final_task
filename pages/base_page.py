@@ -6,7 +6,7 @@ from selenium.common.exceptions import (
 import math
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from locators import BasePageLocators
+from locators import BasePageLocators, MainPageLocators
 
 
 class BasePage:
@@ -74,3 +74,8 @@ class BasePage:
         assert self.is_element_present(
             *BasePageLocators.LOGIN_LINK
         ), "Login link is not presented"
+
+    def go_to_basket(self):
+        from .basket_page import BasketPage
+        self.click_element(*BasePageLocators.BASKET_BTN)
+        return BasketPage(self.browser, self.browser.current_url)
